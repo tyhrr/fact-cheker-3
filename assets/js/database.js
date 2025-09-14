@@ -65,7 +65,23 @@ class DatabaseManager {
         throw new Error(`Failed to load database: ${response.status} ${response.statusText}`);
       }
       
-      this.data = await response.json();
+      const rawData = await response.json();
+      
+      // Transform array to expected format
+      if (Array.isArray(rawData)) {
+        this.data = {
+          articles: rawData,
+          searchIndex: {},
+          metadata: {
+            version: '1.0.0',
+            language: 'hr',
+            totalArticles: rawData.length,
+            lastUpdated: new Date().toISOString()
+          }
+        };
+      } else {
+        this.data = rawData;
+      }
       
       // Validate data structure
       this._validateData();

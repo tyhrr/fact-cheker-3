@@ -153,26 +153,30 @@ class CroatianLawApp {
     }
     
     // Initialize database manager
-    if (window.DatabaseManager) {
-      this.database = new window.DatabaseManager();
-      initPromises.push(this.database.initialize());
+    if (window.Database) {
+      this.database = window.Database;
+      if (!this.database.isInitialized) {
+        initPromises.push(this.database.initialize());
+      }
     }
     
     // Initialize language manager
     if (window.LanguageManager) {
-      this.languageManager = new window.LanguageManager();
-      initPromises.push(this.languageManager.initialize());
+      this.languageManager = window.LanguageManager;
+      if (!this.languageManager.isInitialized) {
+        initPromises.push(this.languageManager.initialize());
+      }
     }
     
     // Initialize search engine
     if (window.SearchEngine) {
-      this.searchEngine = new window.SearchEngine();
+      this.searchEngine = window.SearchEngine;
       // Will initialize with database reference later
     }
     
     // Initialize relevance scoring
     if (window.RelevanceScoring) {
-      this.relevanceScoring = new window.RelevanceScoring();
+      this.relevanceScoring = window.RelevanceScoring;
       initPromises.push(this.relevanceScoring.initialize());
     }
     
@@ -992,16 +996,16 @@ class CroatianLawApp {
    */
   checkBrowserCompatibility() {
     const requiredFeatures = [
-      'fetch',
-      'Promise',
-      'localStorage',
-      'addEventListener',
-      'querySelector'
+      { name: 'fetch', check: () => typeof window.fetch !== 'undefined' },
+      { name: 'Promise', check: () => typeof window.Promise !== 'undefined' },
+      { name: 'localStorage', check: () => typeof window.localStorage !== 'undefined' },
+      { name: 'addEventListener', check: () => typeof window.addEventListener !== 'undefined' },
+      { name: 'querySelector', check: () => typeof document.querySelector !== 'undefined' }
     ];
     
     const missingFeatures = requiredFeatures.filter(feature => 
-      typeof window[feature] === 'undefined'
-    );
+      !feature.check()
+    ).map(feature => feature.name);
     
     if (missingFeatures.length > 0) {
       console.error('Browser missing required features:', missingFeatures);
