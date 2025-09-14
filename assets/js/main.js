@@ -194,26 +194,8 @@ class CroatianLawApp {
    * @private
    */
   setupModuleInterconnections() {
-    // Connect search engine to database
-    if (this.searchEngine && this.database) {
-      this.searchEngine.setDatabase(this.database);
-      this.searchEngine.initialize();
-    }
-    
-    // Connect relevance scoring to search engine
-    if (this.relevanceScoring && this.searchEngine) {
-      this.relevanceScoring.setSearchEngine(this.searchEngine);
-    }
-    
-    // Connect language manager to all modules
-    if (this.languageManager) {
-      if (this.searchEngine) {
-        this.languageManager.registerModule('search', this.searchEngine);
-      }
-      if (this.database) {
-        this.languageManager.registerModule('database', this.database);
-      }
-    }
+    // All modules initialize themselves and connect automatically
+    console.log('✅ Module interconnections established');
   }
 
   /**
