@@ -69,6 +69,14 @@ class DatabaseManager {
       
       // Transform array to expected format
       if (Array.isArray(rawData)) {
+        // Extract categories from articles
+        const categories = {};
+        rawData.forEach(article => {
+          if (article.category) {
+            categories[article.category] = (categories[article.category] || 0) + 1;
+          }
+        });
+        
         this.data = {
           articles: rawData,
           searchIndex: {},
@@ -76,6 +84,7 @@ class DatabaseManager {
             version: '1.0.0',
             language: 'hr',
             totalArticles: rawData.length,
+            categories: categories,
             lastUpdated: new Date().toISOString()
           }
         };
@@ -88,7 +97,7 @@ class DatabaseManager {
       
       // Store metadata
       this.metadata = {
-        ...this.data.metadata,
+        ...(this.data.metadata || {}),
         loadTime: performance.now() - startTime
       };
       
@@ -99,7 +108,7 @@ class DatabaseManager {
       this.metrics.loadTime = performance.now() - startTime;
       
       console.log(`✅ Database loaded successfully in ${Math.round(this.metrics.loadTime)}ms`);
-      console.log(`📊 Loaded ${this.metadata.totalArticles} articles across ${Object.keys(this.metadata.categories).length} categories`);
+      console.log(`📊 Loaded ${this.metadata.totalArticles} articles across ${Object.keys(this.metadata.categories || {}).length} categories`);
       
       // Hide loading indicator
       this._showLoadingIndicator(false);
