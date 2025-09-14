@@ -1,10 +1,10 @@
 /* ==========================================================================
-   Neumorphism Design System
-   Soft UI Components with Light/Dark Theme Support
+   Neumorphism Design System - Enhanced Version
+   Soft UI Components inspired by modern neumorphic interfaces
    ========================================================================== */
 
 /* ==========================================================================
-   Neumorphic Button Base
+   Neumorphic Button Base - Enhanced
    ========================================================================== */
 
 .neumorphic-btn {
@@ -14,7 +14,7 @@
   justify-content: center;
   background-color: var(--color-surface);
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-neumorphic-outset);
   color: var(--color-text-primary);
   cursor: pointer;
@@ -22,17 +22,30 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   line-height: 1;
-  min-height: 40px;
-  padding: var(--space-2) var(--space-4);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
   text-decoration: none;
   transition: all var(--transition-base);
   user-select: none;
   white-space: nowrap;
+  overflow: hidden;
+}
+
+.neumorphic-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .neumorphic-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-neumorphic-floating);
 }
 
 .neumorphic-btn:active,
@@ -43,7 +56,7 @@
 
 .neumorphic-btn:focus {
   outline: none;
-  box-shadow: var(--shadow-neumorphic-outset), 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: var(--shadow-neumorphic-outset), 0 0 0 3px rgba(255, 90, 95, 0.3);
 }
 
 .neumorphic-btn:disabled {
@@ -55,17 +68,235 @@
 
 /* Button Variants */
 .neumorphic-btn.primary {
-  background: linear-gradient(145deg, var(--color-primary-light), var(--color-primary-dark));
+  background: linear-gradient(145deg, var(--color-primary), var(--color-primary-dark));
   color: var(--color-text-inverse);
-  box-shadow: 8px 8px 16px rgba(79, 70, 229, 0.2), -8px -8px 16px rgba(99, 102, 241, 0.1);
+  box-shadow: 8px 8px 16px rgba(255, 90, 95, 0.3), -8px -8px 16px rgba(255, 255, 255, 0.8);
 }
 
 .neumorphic-btn.primary:hover {
-  box-shadow: 12px 12px 24px rgba(79, 70, 229, 0.3), -12px -12px 24px rgba(99, 102, 241, 0.15);
+  box-shadow: 12px 12px 24px rgba(255, 90, 95, 0.4), -12px -12px 24px rgba(255, 255, 255, 0.9);
 }
 
 .neumorphic-btn.primary:active {
-  box-shadow: inset 4px 4px 8px rgba(79, 70, 229, 0.3), inset -4px -4px 8px rgba(99, 102, 241, 0.1);
+  box-shadow: inset 4px 4px 8px rgba(255, 90, 95, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Circular Controls - Like in the image
+   ========================================================================== */
+
+.neumorphic-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-neumorphic-outset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.neumorphic-circle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.neumorphic-circle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-neumorphic-floating);
+}
+
+.neumorphic-circle:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-neumorphic-pressed);
+}
+
+.neumorphic-circle.large {
+  width: 80px;
+  height: 80px;
+}
+
+.neumorphic-circle.small {
+  width: 40px;
+  height: 40px;
+}
+
+/* Power Button Style */
+.neumorphic-circle.power {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, var(--color-surface) 0%, #dde3ea 100%);
+}
+
+.neumorphic-circle.power::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--color-primary);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.neumorphic-circle.power::before {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 15px;
+  background: var(--color-primary);
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Slider Controls - Like in the image
+   ========================================================================== */
+
+.neumorphic-slider {
+  width: 200px;
+  height: 60px;
+  background: var(--color-surface);
+  border-radius: 30px;
+  box-shadow: var(--shadow-neumorphic-inset);
+  position: relative;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.neumorphic-slider-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 26px;
+}
+
+.neumorphic-slider-thumb {
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface);
+  border-radius: 50%;
+  box-shadow: var(--shadow-neumorphic-outset);
+  position: absolute;
+  top: 0;
+  transition: all var(--transition-base);
+  cursor: grab;
+}
+
+.neumorphic-slider-thumb:active {
+  cursor: grabbing;
+  box-shadow: var(--shadow-neumorphic-floating);
+}
+
+.neumorphic-slider-thumb.active {
+  background: var(--color-primary);
+  box-shadow: 6px 6px 12px rgba(255, 90, 95, 0.3), -6px -6px 12px rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   Neumorphic Cards - Like in the image
+   ========================================================================== */
+
+.neumorphic-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-neumorphic-outset);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.neumorphic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.02));
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.neumorphic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-neumorphic-floating);
+}
+
+.neumorphic-card.compact {
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+}
+
+.neumorphic-card.large {
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+}
+
+/* ==========================================================================
+   Control Panels - Like in the image
+   ========================================================================== */
+
+.neumorphic-panel {
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-neumorphic-outset);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.neumorphic-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(0,0,0,0.03));
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Search Input - Enhanced Neumorphic Style
+   ========================================================================== */
+
+.neumorphic-input {
+  width: 100%;
+  background: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-neumorphic-inset);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  padding: var(--space-4) var(--space-6);
+  transition: all var(--transition-base);
+}
+
+.neumorphic-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-neumorphic-inset), 0 0 0 3px rgba(255, 90, 95, 0.2);
+}
+
+.neumorphic-input::placeholder {
+  color: var(--color-text-tertiary);
 }
 
 .neumorphic-btn.secondary {

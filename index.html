@@ -60,25 +60,22 @@
                 <div class="header-controls">
                     <!-- Language Selector -->
                     <div class="language-selector">
-                        <button class="language-btn neumorphic-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                        <button class="neumorphic-circle language-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
                             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M12.87 15.07L10.33 12.56L10.36 12.53C12.1 10.59 13.34 8.36 14.07 6H17V4H10V2H8V4H1V6H12.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8H4.69C5.42 9.63 6.42 11.17 7.67 12.56L2.58 17.58L4 19L9 14L12.11 17.11L12.87 15.07ZM18.5 10H16.5L12 22H14L15.12 19H19.87L21 22H23L18.5 10ZM15.88 17L17.5 12.67L19.12 17H15.88Z"/>
                             </svg>
-                            <span id="current-language">HR</span>
-                            <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/>
-                            </svg>
+                            <span id="current-language" style="font-size: 10px; margin-top: 2px;">HR</span>
                         </button>
-                        <div class="language-dropdown" id="language-dropdown" role="menu" aria-labelledby="language-btn">
-                            <button class="language-option" data-lang="hr" role="menuitem">
+                        <div class="language-dropdown neumorphic-card" id="language-dropdown" role="menu" aria-labelledby="language-btn">
+                            <button class="language-option neumorphic-btn" data-lang="hr" role="menuitem">
                                 <span class="flag">🇭🇷</span>
                                 <span>Hrvatski</span>
                             </button>
-                            <button class="language-option" data-lang="en" role="menuitem">
+                            <button class="language-option neumorphic-btn" data-lang="en" role="menuitem">
                                 <span class="flag">🇺🇸</span>
                                 <span>English</span>
                             </button>
-                            <button class="language-option" data-lang="es" role="menuitem">
+                            <button class="language-option neumorphic-btn" data-lang="es" role="menuitem">
                                 <span class="flag">🇪🇸</span>
                                 <span>Español</span>
                             </button>
@@ -86,12 +83,12 @@
                     </div>
                     
                     <!-- Theme Toggle -->
-                    <button class="theme-toggle neumorphic-btn" id="theme-toggle" aria-label="Toggle dark mode">
-                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18ZM12 16C14.21 16 16 14.21 16 12S14.21 8 12 8 8 9.79 8 12 9.79 16 12 16ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5S10.35 5.15 9.61 5.42L12 2ZM3.34 7L7.5 6.65C6.9 7.16 6.36 7.78 5.94 8.5C5.52 9.22 5.24 10.05 5.14 10.94L3.34 7ZM3.36 17L5.13 13.06C5.24 13.95 5.52 14.78 5.94 15.5C6.36 16.22 6.9 16.84 7.5 17.35L3.36 17ZM20.64 17L16.5 17.35C17.1 16.84 17.64 16.22 18.06 15.5C18.48 14.78 18.76 13.95 18.86 13.06L20.64 17ZM20.66 7L18.86 10.94C18.76 10.05 18.48 9.22 18.06 8.5C17.64 7.78 17.1 7.16 16.5 6.65L20.66 7ZM12 22L9.61 18.58C10.35 18.85 11.16 19 12 19S13.65 18.85 14.39 18.58L12 22Z"/>
+                    <button class="neumorphic-circle large theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
+                            <path d="M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18ZM12 16C14.21 16 16 14.21 16 12S14.21 8 12 8 8 9.79 8 12 9.79 16 12 16ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5S10.35 5.15 9.61 5.42L12 2Z"/>
                         </svg>
-                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M17.75 4.09L15.22 6.03L16.13 9.09L13.5 7.28L10.87 9.09L11.78 6.03L9.25 4.09L12.44 4L13.5 1L14.56 4L17.75 4.09ZM21.25 11L19.61 12.25L20.2 14.23L18.5 13.06L16.8 14.23L17.39 12.25L15.75 11L17.81 10.95L18.5 9L19.19 10.95L21.25 11ZM18.97 15.95C19.8 15.87 20.69 17.05 20.16 17.8C19.84 18.25 19.5 18.67 19.08 19.07C15.17 23 8.84 23 4.94 19.07C1.03 15.17 1.03 8.83 4.94 4.93C5.34 4.53 5.76 4.17 6.21 3.85C6.96 3.32 8.14 4.21 8.06 5.04C7.79 7.9 8.75 10.87 10.95 13.06C13.14 15.26 16.1 16.22 18.97 15.95Z"/>
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" style="display: none;">
+                            <path d="M18.97 15.95C19.8 15.87 20.69 17.05 20.16 17.8C19.84 18.25 19.5 18.67 19.08 19.07C15.17 23 8.84 23 4.94 19.07C1.03 15.17 1.03 8.83 4.94 4.93C5.34 4.53 5.76 4.17 6.21 3.85C6.96 3.32 8.14 4.21 8.06 5.04C7.79 7.9 8.75 10.87 10.95 13.06C13.14 15.26 16.1 16.22 18.97 15.95Z"/>
                         </svg>
                     </button>
                 </div>
@@ -104,39 +101,43 @@
         <div class="container">
             <!-- Search Section -->
             <section class="search-section" role="search" aria-label="Search Croatian labor law">
-                <div class="search-container">
-                    <div class="search-box neumorphic-inset">
-                        <div class="search-input-wrapper">
-                            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5C16 11.11 15.41 12.59 14.44 13.73L14.71 14H15.5L20.5 19L19 20.5L14 15.5V14.71L13.73 14.44C12.59 15.41 11.11 16 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3M9.5 5C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/>
-                            </svg>
-                            <input 
-                                type="search" 
-                                class="search-input" 
-                                id="search-input"
-                                placeholder="Search Croatian labor law articles..."
-                                aria-label="Search Croatian labor law articles"
-                                autocomplete="off"
-                                spellcheck="false"
-                            >
-                            <button class="clear-search-btn" id="clear-search" aria-label="Clear search" style="display: none;">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/>
+                <div class="neumorphic-panel">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <div class="search-input-wrapper">
+                                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5C16 11.11 15.41 12.59 14.44 13.73L14.71 14H15.5L20.5 19L19 20.5L14 15.5V14.71L13.73 14.44C12.59 15.41 11.11 16 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3M9.5 5C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/>
                                 </svg>
-                            </button>
+                                <input 
+                                    type="search" 
+                                    class="neumorphic-input" 
+                                    id="search-input"
+                                    placeholder="Search Croatian labor law articles..."
+                                    aria-label="Search Croatian labor law articles"
+                                    autocomplete="off"
+                                    spellcheck="false"
+                                >
+                                <button class="neumorphic-circle small clear-search-btn" id="clear-search" aria-label="Clear search" style="display: none;">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Suggestions -->
+                        <div class="search-suggestions neumorphic-card" id="search-suggestions" style="display: none;" role="listbox" aria-label="Search suggestions">
+                            <!-- Dynamic suggestions will be inserted here -->
                         </div>
                     </div>
-                    
-                    <!-- Search Suggestions -->
-                    <div class="search-suggestions neumorphic-card" id="search-suggestions" style="display: none;" role="listbox" aria-label="Search suggestions">
-                        <!-- Dynamic suggestions will be inserted here -->
-                    </div>
-                    
-                    <!-- Search Filters -->
+                </div>
+                
+                <!-- Search Filters -->
+                <div class="neumorphic-card compact">
                     <div class="search-filters">
                         <div class="filter-group">
                             <label class="filter-label" for="article-filter">Article Type:</label>
-                            <select class="filter-select neumorphic-inset" id="article-filter">
+                            <select class="neumorphic-input" id="article-filter">
                                 <option value="all" data-i18n="all">All Articles</option>
                                 <option value="employment" data-i18n="employment">Employment</option>
                                 <option value="termination" data-i18n="termination">Termination</option>
@@ -148,13 +149,14 @@
                         
                         <div class="filter-group">
                             <label class="filter-label" for="sort-filter">Sort by:</label>
-                            <select class="filter-select neumorphic-inset" id="sort-filter">
+                            <select class="neumorphic-input" id="sort-filter">
                                 <option value="relevance" data-i18n="relevance">Relevance</option>
                                 <option value="article-number" data-i18n="article-number">Article Number</option>
                                 <option value="alphabetical" data-i18n="alphabetical">Alphabetical</option>
                             </select>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
 

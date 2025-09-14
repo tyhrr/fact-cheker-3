@@ -11,30 +11,31 @@
    ========================================================================== */
 
 :root {
-  /* Color Palette - Light Theme */
-  --color-background: #f0f2f5;
-  --color-surface: #f0f2f5;
-  --color-surface-elevated: #ffffff;
-  --color-primary: #4f46e5;
-  --color-primary-dark: #3730a3;
-  --color-primary-light: #6366f1;
-  --color-secondary: #64748b;
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #64748b;
-  --color-text-tertiary: #94a3b8;
+  /* Enhanced Color Palette - Neumorphic Style inspired by the image */
+  --color-background: linear-gradient(145deg, #e8ecf0 0%, #f1f5f9 100%);
+  --color-surface: #e8ecf0;
+  --color-surface-elevated: #f5f7fa;
+  --color-primary: #ff5a5f;
+  --color-primary-dark: #e5464b;
+  --color-primary-light: #ff7073;
+  --color-secondary: #6b7280;
+  --color-text-primary: #374151;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
   --color-text-inverse: #ffffff;
-  --color-border: #e2e8f0;
+  --color-border: #d1d5db;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
   
-  /* Neumorphism Shadows - Light Theme */
-  --shadow-neumorphic-outset: 8px 8px 16px #d1d5db, -8px -8px 16px #ffffff;
-  --shadow-neumorphic-inset: inset 8px 8px 16px #d1d5db, inset -8px -8px 16px #ffffff;
-  --shadow-neumorphic-subtle: 4px 4px 8px #d1d5db, -4px -4px 8px #ffffff;
-  --shadow-neumorphic-pressed: inset 4px 4px 8px #d1d5db, inset -4px -4px 8px #ffffff;
-  --shadow-elevated: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+  /* Enhanced Neumorphism Shadows - Deeper, softer shadows like in the image */
+  --shadow-neumorphic-outset: 12px 12px 24px #c8d0d8, -12px -12px 24px #ffffff;
+  --shadow-neumorphic-inset: inset 12px 12px 24px #c8d0d8, inset -12px -12px 24px #ffffff;
+  --shadow-neumorphic-subtle: 6px 6px 12px #c8d0d8, -6px -6px 12px #ffffff;
+  --shadow-neumorphic-pressed: inset 6px 6px 12px #c8d0d8, inset -6px -6px 12px #ffffff;
+  --shadow-elevated: 0 20px 40px rgba(200, 208, 216, 0.4), 0 8px 16px rgba(200, 208, 216, 0.2);
+  --shadow-neumorphic-floating: 8px 8px 16px #c8d0d8, -8px -8px 16px #ffffff, 0 8px 32px rgba(200, 208, 216, 0.3);
   
   /* Typography */
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -152,11 +153,12 @@ body {
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
   color: var(--color-text-primary);
-  background-color: var(--color-background);
+  background: var(--color-background);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  transition: background var(--transition-base), color var(--transition-base);
 }
 
 /* Focus Management */
@@ -425,7 +427,121 @@ body {
 }
 
 /* ==========================================================================
-   Search Section
+   Enhanced Neumorphic Layout
+   ========================================================================== */
+
+/* Header Controls Enhancement */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.language-selector {
+  position: relative;
+}
+
+.language-dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  right: 0;
+  min-width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px) scale(0.95);
+  transition: all var(--transition-base);
+  z-index: var(--z-dropdown);
+}
+
+.language-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.language-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+
+.language-option:last-child {
+  margin-bottom: 0;
+}
+
+/* Search Section Enhancement */
+.search-section {
+  margin-bottom: var(--space-16);
+}
+
+.neumorphic-panel {
+  margin-bottom: var(--space-8);
+}
+
+.search-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  position: relative;
+  padding: var(--space-2);
+}
+
+.search-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-primary);
+  flex-shrink: 0;
+  margin-left: var(--space-2);
+}
+
+/* Filter Enhancement */
+.search-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.filter-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+/* Results Section Enhancement */
+.results-section {
+  margin-top: var(--space-8);
+}
+
+.search-stats {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-neumorphic-subtle);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Search Section - Original Styles Updated
    ========================================================================== */
 
 .search-section {
