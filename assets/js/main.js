@@ -1010,6 +1010,54 @@ class CroatianLawApp {
   }
 
   /**
+   * Show compatibility error message
+   * @private
+   * @param {Array} missingFeatures - Array of missing features
+   */
+  showCompatibilityError(missingFeatures) {
+    const errorContainer = document.getElementById('error-container') || document.body;
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'compatibility-error alert alert-danger';
+    errorMessage.innerHTML = `
+      <h4>Browser Compatibility Issue</h4>
+      <p>Your browser is missing some features required for this application:</p>
+      <ul>
+        ${missingFeatures.map(feature => `<li>${feature}</li>`).join('')}
+      </ul>
+      <p>Please update your browser or try a modern browser like Chrome, Firefox, or Edge.</p>
+    `;
+    errorContainer.appendChild(errorMessage);
+  }
+
+  /**
+   * Handle initialization error
+   * @private
+   * @param {Error} error - Initialization error
+   */
+  handleInitializationError(error) {
+    console.error('Initialization error:', error);
+    
+    this.state.hasError = true;
+    this.state.errorMessage = error.message || 'Failed to initialize application';
+    
+    // Show error to user
+    const errorContainer = document.getElementById('error-container') || document.body;
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'initialization-error alert alert-danger';
+    errorMessage.innerHTML = `
+      <h4>Application Failed to Load</h4>
+      <p>There was an error initializing the Croatian Working Law Fact Checker:</p>
+      <p><strong>${this.state.errorMessage}</strong></p>
+      <p>Please refresh the page to try again. If the problem persists, check the browser console for more details.</p>
+      <button onclick="window.location.reload()" class="btn btn-primary">Refresh Page</button>
+    `;
+    errorContainer.appendChild(errorMessage);
+    
+    // Hide loading state
+    this.hideLoadingState();
+  }
+
+  /**
    * Dispatch app ready event
    * @private
    */

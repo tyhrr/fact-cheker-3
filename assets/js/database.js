@@ -59,7 +59,7 @@ class DatabaseManager {
       this._showLoadingIndicator(true);
       
       // Load JSON data
-      const response = await fetch('assets/data/croatian-labor-law.json');
+      const response = await fetch('assets/data/croatian-working-law.json');
       
       if (!response.ok) {
         throw new Error(`Failed to load database: ${response.status} ${response.statusText}`);

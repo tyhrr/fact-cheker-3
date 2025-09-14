@@ -1,0 +1,59 @@
+{
+  "name": "croatian-working-law-fact-checker",
+  "version": "1.0.0",
+  "description": "A multilingual fact-checking application for Croatian labor law with neumorphism design and intelligent relevance scoring",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server -p 3000 -o",
+    "extract-pdf": "node scripts/pdf-to-json-converter.js",
+    "process-text": "node scripts/text-processor.js",
+    "generate-db": "node scripts/database-generator.js",
+    "translate": "node scripts/translation-generator.js",
+    "validate": "node scripts/data-validator.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint assets/js tests scripts",
+    "lint:fix": "eslint assets/js tests scripts --fix",
+    "format": "prettier --write \"**/*.{js,html,css,md}\"",
+    "build": "npm run extract-pdf && npm run process-text && npm run generate-db && npm run translate && npm run validate",
+    "serve": "http-server -p 8080 -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/croatian-working-law-fact-checker.git"
+  },
+  "keywords": [
+    "croatian-law",
+    "labor-law",
+    "fact-checker",
+    "multilingual",
+    "neumorphism",
+    "vanilla-javascript",
+    "github-pages"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-jsdoc": "^46.0.0",
+    "franc": "^6.0.0",
+    "http-server": "^14.1.1",
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^29.0.0",
+    "natural": "^6.0.0",
+    "pdf-parse": "^1.1.1",
+    "prettier": "^3.0.0",
+    "puppeteer": "^21.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie < 11",
+    "not op_mini all"
+  ]
+}
