@@ -59,7 +59,25 @@ class DatabaseManager {
       this._showLoadingIndicator(true);
       
       // Load JSON data
-      const response = await fetch('assets/data/croatian-working-law.json');
+      const dataFile = 'assets/data/croatian-working-law-multilingual.json';
+      const fallbackFile = 'assets/data/croatian-working-law.json';
+      
+      let response;
+      try {
+        // Try to load multilingual data first
+        response = await fetch(dataFile);
+        if (!response.ok) {
+          // Fall back to original data
+          console.log('📋 Multilingual data not found, falling back to original data...');
+          response = await fetch(fallbackFile);
+        } else {
+          console.log('🌍 Loading multilingual database...');
+        }
+      } catch (error) {
+        // If multilingual fails, try fallback
+        console.log('📋 Falling back to original data...');
+        response = await fetch(fallbackFile);
+      }
       
       if (!response.ok) {
         throw new Error(`Failed to load database: ${response.status} ${response.statusText}`);
@@ -264,11 +282,12 @@ class DatabaseManager {
     // If no query, return articles sorted by relevance score
     if (!query.trim()) {
       results = articles
-        .sort((a, b) => b.relevanceScore - a.relevanceScore)
+        .filter(article => article.language === language) // Filter by display language
+        .sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0))
         .slice(offset, offset + limit);
     } else {
-      // Perform text search
-      results = this._performTextSearch(articles, query, language);
+      // Perform multilingual text search
+      results = this._performMultilingualTextSearch(articles, query, language);
       results = results.slice(offset, offset + limit);
     }
     
@@ -395,6 +414,71 @@ class DatabaseManager {
     });
     
     return highlighted;
+  }
+
+  /**
+   * Perform multilingual text search - searches in all languages but returns results in target language
+   * @private
+   * @param {Array} articles - Articles to search
+   * @param {string} query - Search query  
+   * @param {string} targetLanguage - Language for result display
+   * @returns {Array} Sorted search results in target language
+   */
+  _performMultilingualTextSearch(articles, query, targetLanguage) {
+    const queryWords = query.toLowerCase().trim().split(/\s+/);
+    const matchedArticleIds = new Set();
+    const results = [];
+    
+    // Step 1: Search in all languages and collect matching originalIds
+    articles.forEach(article => {
+      const score = this._calculateRelevanceScore(article, queryWords, article.language);
+      
+      if (score > 0) {
+        matchedArticleIds.add(article.originalId || article.id);
+      }
+    });
+    
+    // Step 2: For each matched originalId, find the article in target language
+    matchedArticleIds.forEach(originalId => {
+      // Find the article version in target language
+      const targetArticle = articles.find(article => 
+        (article.originalId === originalId || article.id === originalId) && 
+        article.language === targetLanguage
+      );
+      
+      if (targetArticle) {
+        // Calculate score for the target language version
+        const score = this._calculateRelevanceScore(targetArticle, queryWords, targetLanguage);
+        
+        // Also check for matches in other language versions for cross-language bonus
+        const relatedArticles = articles.filter(article => 
+          article.originalId === originalId && article.language !== targetLanguage
+        );
+        
+        let crossLanguageBonus = 0;
+        relatedArticles.forEach(relatedArticle => {
+          const relatedScore = this._calculateRelevanceScore(relatedArticle, queryWords, relatedArticle.language);
+          crossLanguageBonus += relatedScore * 0.3; // 30% bonus for cross-language matches
+        });
+        
+        const finalScore = score + crossLanguageBonus;
+        
+        results.push({
+          ...targetArticle,
+          searchScore: finalScore,
+          highlightedContent: this._highlightMatches(targetArticle.content, queryWords),
+          highlightedTitle: this._highlightMatches(targetArticle.title, queryWords),
+          crossLanguageMatch: crossLanguageBonus > 0
+        });
+      }
+    });
+    
+    // Sort by combined relevance score
+    return results.sort((a, b) => {
+      const scoreA = a.searchScore * 0.7 + (a.relevanceScore || 0) * 0.3;
+      const scoreB = b.searchScore * 0.7 + (b.relevanceScore || 0) * 0.3;
+      return scoreB - scoreA;
+    });
   }
 
   /**

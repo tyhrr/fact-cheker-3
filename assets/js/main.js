@@ -1016,6 +1016,175 @@ class CroatianLawApp {
   }
 
   /**
+   * Clear search input and results
+   * @private
+   */
+  clearSearch() {
+    if (this.elements.searchInput) {
+      this.elements.searchInput.value = '';
+      this.elements.searchInput.focus();
+    }
+    
+    // Clear results
+    if (this.elements.resultsSection) {
+      this.elements.resultsSection.style.display = 'none';
+    }
+    
+    // Clear suggestions
+    this.hideSuggestions();
+    
+    // Reset state
+    this.state.currentQuery = '';
+    this.state.searchResults = [];
+    
+    console.log('🧹 Search cleared');
+  }
+
+  /**
+   * Show error message to user
+   * @private
+   * @param {string} message - Error message
+   */
+  showErrorMessage(message) {
+    // Create or get error container
+    let errorContainer = document.getElementById('error-message');
+    if (!errorContainer) {
+      errorContainer = document.createElement('div');
+      errorContainer.id = 'error-message';
+      errorContainer.className = 'alert alert-danger';
+      
+      // Insert after search section
+      const searchSection = document.querySelector('.search-section');
+      if (searchSection) {
+        searchSection.parentNode.insertBefore(errorContainer, searchSection.nextSibling);
+      } else {
+        document.body.appendChild(errorContainer);
+      }
+    }
+    
+    errorContainer.innerHTML = `
+      <div class="error-content">
+        <strong>Error:</strong> ${message}
+        <button type="button" class="close" onclick="this.parentElement.parentElement.style.display='none'">
+          <span>&times;</span>
+        </button>
+      </div>
+    `;
+    
+    errorContainer.style.display = 'block';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      errorContainer.style.display = 'none';
+    }, 5000);
+  }
+
+  /**
+   * Show minimum search length message
+   * @private
+   */
+  showMinLengthMessage() {
+    const message = `Please enter at least ${this.config.minSearchLength} characters to search.`;
+    this.showInfoMessage(message);
+  }
+
+  /**
+   * Show info message to user
+   * @private
+   * @param {string} message - Info message
+   */
+  showInfoMessage(message) {
+    // Create or get info container
+    let infoContainer = document.getElementById('info-message');
+    if (!infoContainer) {
+      infoContainer = document.createElement('div');
+      infoContainer.id = 'info-message';
+      infoContainer.className = 'alert alert-info';
+      
+      // Insert after search section
+      const searchSection = document.querySelector('.search-section');
+      if (searchSection) {
+        searchSection.parentNode.insertBefore(infoContainer, searchSection.nextSibling);
+      } else {
+        document.body.appendChild(infoContainer);
+      }
+    }
+    
+    infoContainer.innerHTML = `
+      <div class="info-content">
+        ${message}
+        <button type="button" class="close" onclick="this.parentElement.parentElement.style.display='none'">
+          <span>&times;</span>
+        </button>
+      </div>
+    `;
+    
+    infoContainer.style.display = 'block';
+    
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      infoContainer.style.display = 'none';
+    }, 3000);
+  }
+
+  /**
+   * Show search suggestions
+   * @private
+   * @param {Array} suggestions - Array of suggestion strings
+   */
+  showSuggestions(suggestions) {
+    if (!suggestions || suggestions.length === 0) {
+      this.hideSuggestions();
+      return;
+    }
+
+    // Create or get suggestions container
+    let suggestionsContainer = document.getElementById('search-suggestions');
+    if (!suggestionsContainer) {
+      suggestionsContainer = document.createElement('div');
+      suggestionsContainer.id = 'search-suggestions';
+      suggestionsContainer.className = 'search-suggestions';
+      
+      // Insert after search input
+      const searchInputWrapper = this.elements.searchInput.parentNode;
+      searchInputWrapper.appendChild(suggestionsContainer);
+    }
+    
+    // Clear previous suggestions
+    suggestionsContainer.innerHTML = '';
+    
+    // Add suggestions
+    suggestions.slice(0, 5).forEach((suggestion, index) => {
+      const suggestionElement = document.createElement('button');
+      suggestionElement.className = 'suggestion-item';
+      suggestionElement.textContent = suggestion;
+      suggestionElement.setAttribute('data-suggestion', suggestion);
+      
+      suggestionElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.elements.searchInput.value = suggestion;
+        this.hideSuggestions();
+        this.handleSearchSubmit();
+      });
+      
+      suggestionsContainer.appendChild(suggestionElement);
+    });
+    
+    suggestionsContainer.style.display = 'block';
+  }
+
+  /**
+   * Hide search suggestions
+   * @private
+   */
+  hideSuggestions() {
+    const suggestionsContainer = document.getElementById('search-suggestions');
+    if (suggestionsContainer) {
+      suggestionsContainer.style.display = 'none';
+    }
+  }
+
+  /**
    * Handle initialization error
    * @private
    * @param {Error} error - Initialization error

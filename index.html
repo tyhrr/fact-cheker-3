@@ -61,10 +61,10 @@
                 <div class="header-controls">
                     <!-- Language Selector -->
                     <div class="language-selector">
-                        <button class="neumorphic-circle small language-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                        <button class="neumorphic-circle language-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
                             <span id="current-language" style="font-size: 11px; font-weight: 600;">HR</span>
                         </button>
-                        <div class="language-dropdown neumorphic-card" id="language-dropdown" role="menu" aria-labelledby="language-btn">
+                        <div class="language-dropdown" id="language-dropdown" role="menu" aria-labelledby="language-btn">
                             <button class="language-option neumorphic-btn" data-lang="hr" role="menuitem">
                                 <span class="flag">🇭🇷</span>
                                 <span>Hrvatski</span>
@@ -82,11 +82,21 @@
                     
                     <!-- Theme Toggle -->
                     <button class="neumorphic-circle theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
-                            <path d="M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18ZM12 16C14.21 16 16 14.21 16 12S14.21 8 12 8 8 9.79 8 12 9.79 16 12 16ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5S10.35 5.15 9.61 5.42L12 2Z"/>
+                        <!-- Sol para tema claro -->
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                         </svg>
-                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" style="display: none;">
-                            <path d="M18.97 15.95C19.8 15.87 20.69 17.05 20.16 17.8C19.84 18.25 19.5 18.67 19.08 19.07C15.17 23 8.84 23 4.94 19.07C1.03 15.17 1.03 8.83 4.94 4.93C5.34 4.53 5.76 4.17 6.21 3.85C6.96 3.32 8.14 4.21 8.06 5.04C7.79 7.9 8.75 10.87 10.95 13.06C13.14 15.26 16.1 16.22 18.97 15.95Z"/>
+                        <!-- Luna para tema oscuro -->
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                         </svg>
                     </button>
                 </div>

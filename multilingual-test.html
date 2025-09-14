@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="hr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual System Test - Croatian Working Law</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/neumorphism.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <div class="container" style="padding: 40px 20px;">
+        <header>
+            <h1>🧪 Multilingual System Test</h1>
+            <p>Testing multilingual search functionality for Croatian Working Law Fact Checker</p>
+        </header>
+
+        <section class="neumorphic-card" style="margin: 40px 0;">
+            <h2>🌍 Test Results</h2>
+            <div id="test-results">
+                <p>Running tests...</p>
+            </div>
+        </section>
+
+        <section class="neumorphic-card" style="margin: 40px 0;">
+            <h2>📊 Database Stats</h2>
+            <div id="database-stats">
+                <p>Loading database statistics...</p>
+            </div>
+        </section>
+
+        <section class="neumorphic-card" style="margin: 40px 0;">
+            <h2>🔍 Live Search Tests</h2>
+            
+            <div style="margin: 20px 0;">
+                <h3>Test 1: Croatian Search</h3>
+                <p><strong>Query:</strong> "radno vrijeme" (Croatian for "working hours")</p>
+                <div id="test-hr-results" class="test-results"></div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <h3>Test 2: English Search</h3>
+                <p><strong>Query:</strong> "working hours" (English)</p>
+                <div id="test-en-results" class="test-results"></div>
+            </div>
+
+            <div style="margin: 20px 0;">
+                <h3>Test 3: Spanish Search</h3>
+                <p><strong>Query:</strong> "horas de trabajo" (Spanish for "working hours")</p>
+                <div id="test-es-results" class="test-results"></div>
+            </div>
+        </section>
+    </div>
+
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script>
+        // Test the multilingual system
+        async function runTests() {
+            console.log('🧪 Starting multilingual system tests...');
+            
+            const testResults = document.getElementById('test-results');
+            const dbStats = document.getElementById('database-stats');
+            
+            try {
+                // Initialize database
+                await window.Database.initialize();
+                console.log('✅ Database initialized');
+                
+                // Get database metadata
+                const metadata = await window.Database.getMetadata();
+                console.log('📊 Database metadata:', metadata);
+                
+                // Display database stats
+                dbStats.innerHTML = `
+                    <ul>
+                        <li><strong>Total Articles:</strong> ${metadata.totalArticles}</li>
+                        <li><strong>Database Version:</strong> ${metadata.version || 'N/A'}</li>
+                        <li><strong>Load Time:</strong> ${Math.round(metadata.loadTime || 0)}ms</li>
+                        <li><strong>Categories:</strong> ${Object.keys(metadata.categories || {}).length}</li>
+                        <li><strong>Last Updated:</strong> ${metadata.lastUpdated || 'N/A'}</li>
+                    </ul>
+                `;
+
+                // Test multilingual searches
+                const tests = [
+                    {
+                        name: 'Croatian Search',
+                        query: 'radno vrijeme',
+                        language: 'hr',
+                        elementId: 'test-hr-results'
+                    },
+                    {
+                        name: 'English Search', 
+                        query: 'working hours',
+                        language: 'en',
+                        elementId: 'test-en-results'
+                    },
+                    {
+                        name: 'Spanish Search',
+                        query: 'horas de trabajo', 
+                        language: 'es',
+                        elementId: 'test-es-results'
+                    }
+                ];
+
+                const testResults = [];
+
+                for (const test of tests) {
+                    console.log(`🔍 Running ${test.name}...`);
+                    
+                    const startTime = performance.now();
+                    const results = await window.Database.searchArticles({
+                        query: test.query,
+                        language: test.language,
+                        limit: 5
+                    });
+                    const searchTime = performance.now() - startTime;
+
+                    console.log(`✅ ${test.name} completed:`, results);
+
+                    const resultElement = document.getElementById(test.elementId);
+                    if (results.results && results.results.length > 0) {
+                        let html = `<div class="search-success">✅ Found ${results.total} results in ${Math.round(searchTime)}ms</div>`;
+                        html += '<ul>';
+                        results.results.slice(0, 3).forEach((article, index) => {
+                            html += `<li>
+                                <strong>${article.articleNumber}</strong> (Score: ${Math.round(article.searchScore || 0)}) 
+                                - ${article.title.substring(0, 100)}...
+                                ${article.crossLanguageMatch ? ' 🌍' : ''}
+                            </li>`;
+                        });
+                        html += '</ul>';
+                        resultElement.innerHTML = html;
+                    } else {
+                        resultElement.innerHTML = '<div class="search-error">❌ No results found</div>';
+                    }
+
+                    testResults.push({
+                        name: test.name,
+                        query: test.query,
+                        language: test.language,
+                        resultCount: results.results ? results.results.length : 0,
+                        searchTime: Math.round(searchTime),
+                        hasMultilingualMatches: results.results ? results.results.some(r => r.crossLanguageMatch) : false
+                    });
+                }
+
+                // Display overall test results
+                let summaryHtml = '<div class="test-summary">';
+                summaryHtml += '<h3>📋 Test Summary</h3>';
+                testResults.forEach(test => {
+                    summaryHtml += `
+                        <div class="test-result ${test.resultCount > 0 ? 'success' : 'failure'}">
+                            <strong>${test.name}:</strong> 
+                            ${test.resultCount} results in ${test.searchTime}ms
+                            ${test.hasMultilingualMatches ? ' (includes multilingual matches)' : ''}
+                        </div>
+                    `;
+                });
+                summaryHtml += '</div>';
+
+                document.getElementById('test-results').innerHTML = summaryHtml;
+
+                console.log('🎉 All tests completed successfully!');
+
+            } catch (error) {
+                console.error('❌ Test failed:', error);
+                testResults.innerHTML = `<div class="test-error">❌ Tests failed: ${error.message}</div>`;
+            }
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+
+    <style>
+        .test-summary {
+            background: var(--color-surface-elevated);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            margin: 20px 0;
+        }
+        
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: var(--radius-base);
+        }
+        
+        .test-result.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--color-success);
+        }
+        
+        .test-result.failure {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--color-error);
+        }
+        
+        .test-results {
+            background: var(--color-surface);
+            padding: 15px;
+            border-radius: var(--radius-base);
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .search-success {
+            color: var(--color-success);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .search-error {
+            color: var(--color-error);
+            font-weight: 600;
+        }
+    </style>
+</body>
+</html>

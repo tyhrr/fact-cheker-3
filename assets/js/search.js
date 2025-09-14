@@ -392,19 +392,84 @@ class SearchEngine {
     const categoryName = window.Database?.data?.categories?.[article.category]?.[currentLang] || 
       article.category;
     
+    // Language indicators
+    const languageLabels = {
+      'hr': '🇭🇷 Hrvatski',
+      'en': '🇺🇸 English', 
+      'es': '🇪🇸 Español'
+    };
+    
+    const languageIndicator = languageLabels[article.language] || article.language;
+    const crossLanguageIndicator = article.crossLanguageMatch ? 
+      '<span class="cross-language-match" title="Found in multiple languages">🌍 Multilingual match</span>' : '';
+    
+    // Find original Croatian version and current language version
+    let originalArticle = article;
+    let translatedArticle = article;
+    
+    if (article.originalId && window.Database?.data?.articles) {
+      // Find the original Croatian version
+      originalArticle = window.Database.data.articles.find(art => 
+        art.originalId === article.originalId && art.language === 'hr'
+      ) || article;
+      
+      // Find the version in current language
+      if (currentLang !== 'hr' && currentLang !== article.language) {
+        translatedArticle = window.Database.data.articles.find(art => 
+          art.originalId === article.originalId && art.language === currentLang
+        ) || article;
+      }
+    }
+    
+    // Create the side-by-side content
+    const createContentSection = (contentArticle, isOriginal) => {
+      const label = isOriginal ? 
+        `<span class="content-label">🇭🇷 ${window.LanguageManager?.t('original') || 'Original'}</span>` :
+        `<span class="content-label">${languageLabels[contentArticle.language] || contentArticle.language} ${window.LanguageManager?.t('translation') || 'Translation'}</span>`;
+      
+      return `
+        <div class="${isOriginal ? 'original-content' : 'translated-content'}">
+          ${label}
+          <h4 class="content-title">${contentArticle.highlightedTitle || contentArticle.title}</h4>
+          <div class="content-text">${this.truncateText(contentArticle.highlightedContent || contentArticle.content, 250)}</div>
+        </div>
+      `;
+    };
+    
+    // Determine if we should show side-by-side view
+    const showSideBySide = currentLang !== 'hr' && originalArticle.id !== translatedArticle.id;
+    
+    let contentHtml = '';
+    if (showSideBySide) {
+      contentHtml = `
+        <div class="result-content-split">
+          ${createContentSection(originalArticle, true)}
+          ${createContentSection(translatedArticle, false)}
+        </div>
+      `;
+    } else {
+      contentHtml = `
+        <div class="result-content">
+          <p class="result-text">${this.truncateText(article.highlightedContent || article.content, 300)}</p>
+        </div>
+      `;
+    }
+    
     card.innerHTML = `
       <div class="result-header">
         <h3 class="result-title">${article.highlightedTitle || article.title}</h3>
+        <div class="result-language">
+          <span class="language-indicator">${languageIndicator}</span>
+          ${crossLanguageIndicator}
+        </div>
       </div>
       
       <div class="result-meta">
-        <span class="article-number">Članak ${article.number}</span>
+        <span class="article-number">${article.articleNumber}</span>
         <span class="result-category">${categoryName}</span>
       </div>
       
-      <div class="result-content">
-        <p class="result-text">${this.truncateText(article.highlightedContent || article.content, 300)}</p>
-      </div>
+      ${contentHtml}
       
       <div class="result-actions">
         <div class="relevance-actions">
@@ -564,6 +629,26 @@ class SearchEngine {
       this.displaySuggestions(suggestions);
     } catch (error) {
       console.error('Failed to get suggestions:', error);
+    }
+  }
+
+  /**
+   * Get search suggestions for a given query
+   * @public
+   * @param {string} query - Search query
+   * @returns {Promise<Array>} Array of suggestion strings
+   */
+  async getSuggestions(query) {
+    if (!query || query.length < 2) {
+      return [];
+    }
+    
+    try {
+      const suggestions = await window.Database.getSearchSuggestions(query, 5);
+      return suggestions || [];
+    } catch (error) {
+      console.error('Failed to get suggestions:', error);
+      return [];
     }
   }
 

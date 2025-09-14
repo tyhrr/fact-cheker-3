@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="hr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Test - Croatian Working Law</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/neumorphism.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" tabindex="1">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <!-- Icono de balanza de la justicia -->
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 6.5V10.5L21 9ZM3 9L9 10.5V6.5L3 7V9ZM15 11.5V13H21L20.4 14H15.6L15 11.5ZM9 11.5L8.4 14H3.6L3 13H9V11.5ZM12 7C12.6 7 13 7.4 13 8V20H11V8C11 7.4 11.4 7 12 7Z"/>
+                        </svg>
+                    </div>
+                    <div class="title-section">
+                        <h1 class="main-title" id="app-title">Croatian Working Law Fact Checker</h1>
+                        <p class="subtitle" id="app-subtitle">Multilingual search for Croatian labor law</p>
+                    </div>
+                </div>
+                
+                <div class="header-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector">
+                        <button class="neumorphic-circle language-btn" id="language-btn" aria-label="Select language">
+                            <span id="current-language" style="font-size: 11px; font-weight: 600;">EN</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="neumorphic-circle theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="none">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/>
+                            <line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/>
+                            <line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" role="main">
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-section" role="search">
+                <div class="neumorphic-panel">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <div class="search-input-wrapper">
+                                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5C16 11.11 15.41 12.59 14.44 13.73L14.71 14H15.5L20.5 19L19 20.5L14 15.5V14.71L13.73 14.44C12.59 15.41 11.11 16 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3M9.5 5C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/>
+                                </svg>
+                                <input 
+                                    type="search" 
+                                    class="neumorphic-input" 
+                                    id="search-input"
+                                    placeholder="Search Croatian labor law articles..."
+                                    value="working hours"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Filters -->
+                <div class="neumorphic-card compact">
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label class="filter-label" for="article-filter">Article Type:</label>
+                            <select class="neumorphic-input" id="article-filter">
+                                <option value="all">All Articles</option>
+                                <option value="employment" selected>Employment</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="search-stats">
+                    <span class="results-count">3 results found</span>
+                    <span class="search-time">Search completed in 0.15s</span>
+                </div>
+                
+                <div class="results-container">
+                    <!-- Result Card 1 - Side by Side View -->
+                    <article class="result-card neumorphic-card" data-article-id="210">
+                        <div class="result-header">
+                            <h3 class="result-title">Working Hours and Schedule</h3>
+                            <div class="result-language">
+                                <span class="language-indicator">🇺🇸 English</span>
+                                <span class="cross-language-match" title="Found in multiple languages">🌍 Multilingual match</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-meta">
+                            <span class="article-number">Article 70</span>
+                            <span class="result-category">Employment</span>
+                        </div>
+                        
+                        <div class="result-content-split">
+                            <div class="original-content">
+                                <span class="content-label">🇭🇷 Original</span>
+                                <h4 class="content-title">Radno vrijeme i raspored</h4>
+                                <div class="content-text">Puno radno vrijeme radnika ne može biti duže od četrdeset sati tjedno. Poslodavac je dužan voditi evidenciju o radnom vremenu za svakog radnika.</div>
+                            </div>
+                            <div class="translated-content">
+                                <span class="content-label">🇺🇸 English Translation</span>
+                                <h4 class="content-title">Working Hours and Schedule</h4>
+                                <div class="content-text">Full-time working hours of employees cannot be longer than forty hours per week. The employer is obliged to keep records of working hours for each employee.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-actions">
+                            <div class="relevance-actions">
+                                <button class="relevance-btn helpful neumorphic-btn">
+                                    <svg class="relevance-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M23 10C23 8.89 22.1 8 21 8H14.68L15.64 3.43C15.66 3.33 15.67 3.22 15.67 3.11C15.67 2.7 15.5 2.32 15.23 2.05L14.17 1L7.59 7.58C7.22 7.95 7 8.45 7 9V19C7 20.1 7.9 21 9 21H18C18.83 21 19.54 20.5 19.84 19.78L22.86 12.73C22.95 12.5 23 12.26 23 12V10.08L23 10ZM1 21H5V9H1V21Z"/>
+                                    </svg>
+                                    <span>Helpful</span>
+                                </button>
+                                
+                                <button class="relevance-btn not-helpful neumorphic-btn">
+                                    <svg class="relevance-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M15 3H6C5.17 3 4.46 3.5 4.16 4.22L1.14 11.27C1.05 11.5 1 11.74 1 12V14C1 15.1 1.9 16 3 16H9.31L8.36 20.57C8.34 20.67 8.33 20.78 8.33 20.89C8.33 21.3 8.5 21.68 8.77 21.95L9.83 23L16.41 16.42C16.78 16.05 17 15.55 17 15V5C17 3.9 16.1 3 15 3ZM19 3V15H23V3H19Z"/>
+                                    </svg>
+                                    <span>Not helpful</span>
+                                </button>
+                            </div>
+                            
+                            <div class="result-score">
+                                <span class="score-label">Relevance:</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="score-value">85%</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Result Card 2 - Regular View (Croatian) -->
+                    <article class="result-card neumorphic-card" data-article-id="176">
+                        <div class="result-header">
+                            <h3 class="result-title">Prekovremeni rad</h3>
+                            <div class="result-language">
+                                <span class="language-indicator">🇭🇷 Hrvatski</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-meta">
+                            <span class="article-number">Article 76</span>
+                            <span class="result-category">Employment</span>
+                        </div>
+                        
+                        <div class="result-content">
+                            <p class="result-text">Ako narav posla to zahtijeva, radnik može raditi i duže od punog radnog vremena (prekovremeni rad), ali ne može biti duže od dvanaest sati dnevno...</p>
+                        </div>
+                        
+                        <div class="result-actions">
+                            <div class="relevance-actions">
+                                <button class="relevance-btn helpful neumorphic-btn">
+                                    <svg class="relevance-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M23 10C23 8.89 22.1 8 21 8H14.68L15.64 3.43C15.66 3.33 15.67 3.22 15.67 3.11C15.67 2.7 15.5 2.32 15.23 2.05L14.17 1L7.59 7.58C7.22 7.95 7 8.45 7 9V19C7 20.1 7.9 21 9 21H18C18.83 21 19.54 20.5 19.84 19.78L22.86 12.73C22.95 12.5 23 12.26 23 12V10.08L23 10ZM1 21H5V9H1V21Z"/>
+                                    </svg>
+                                    <span>Helpful</span>
+                                </button>
+                                
+                                <button class="relevance-btn not-helpful neumorphic-btn">
+                                    <svg class="relevance-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M15 3H6C5.17 3 4.46 3.5 4.16 4.22L1.14 11.27C1.05 11.5 1 11.74 1 12V14C1 15.1 1.9 16 3 16H9.31L8.36 20.57C8.34 20.67 8.33 20.78 8.33 20.89C8.33 21.3 8.5 21.68 8.77 21.95L9.83 23L16.41 16.42C16.78 16.05 17 15.55 17 15V5C17 3.9 16.1 3 15 3ZM19 3V15H23V3H19Z"/>
+                                    </svg>
+                                    <span>Not helpful</span>
+                                </button>
+                            </div>
+                            
+                            <div class="result-score">
+                                <span class="score-label">Relevance:</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 72%"></div>
+                                </div>
+                                <span class="score-value">72%</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Result Card 3 - Side by Side View Spanish -->
+                    <article class="result-card neumorphic-card" data-article-id="233">
+                        <div class="result-header">
+                            <h3 class="result-title">Descansos durante la jornada laboral</h3>
+                            <div class="result-language">
+                                <span class="language-indicator">🇪🇸 Español</span>
+                                <span class="cross-language-match" title="Found in multiple languages">🌍 Multilingual match</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-meta">
+                            <span class="article-number">Article 83</span>
+                            <span class="result-category">Employment</span>
+                        </div>
+                        
+                        <div class="result-content-split">
+                            <div class="original-content">
+                                <span class="content-label">🇭🇷 Original</span>
+                                <h4 class="content-title">Stanke tijekom rada</h4>
+                                <div class="content-text">Radnik koji radi najmanje šest sati dnevno ima pravo na stanak od najmanje trideset minuta, osim ako posebnim zakonom nije drukčije propisano.</div>
+                            </div>
+                            <div class="translated-content">
+                                <span class="content-label">🇪🇸 Español Translation</span>
+                                <h4 class="content-title">Descansos durante la jornada laboral</h4>
+                                <div class="content-text">El trabajador que trabaja al menos seis horas al día tiene derecho a un descanso de al menos treinta minutos, a menos que una ley especial disponga lo contrario.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-actions">
+                            <div class="relevance-actions">
+                                <button class="relevance-btn helpful neumorphic-btn">
+                                    <svg class="relevance-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M23 10C23 8.89 22.1 8 21 8H14.68L15.64 3.43C15.66 3.33 15.67 3.22 15.67 3.11C15.67 2.7 15.5 2.32 15.23 2.05L14.17 1L7.59 7.58C7.22 7.95 7 8.45 7 9V19C7 20.1 7.9 21 9 21H18C18.83 21 19.54 20.5 19.84 19.78L22.86 12.73C22.95 12.5 23 12.26 23 12V10.08L23 10ZM1 21H5V9H1V21Z"/>
+                                    </svg>
+                                    <span>Helpful</span>
+                                </button>
+                                
+                                <button class="relevance-btn not-helpful neumorphic-btn">
+                                    <svg class="relevance-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M15 3H6C5.17 3 4.46 3.5 4.16 4.22L1.14 11.27C1.05 11.5 1 11.74 1 12V14C1 15.1 1.9 16 3 16H9.31L8.36 20.57C8.34 20.67 8.33 20.78 8.33 20.89C8.33 21.3 8.5 21.68 8.77 21.95L9.83 23L16.41 16.42C16.78 16.05 17 15.55 17 15V5C17 3.9 16.1 3 15 3ZM19 3V15H23V3H19Z"/>
+                                    </svg>
+                                    <span>Not helpful</span>
+                                </button>
+                            </div>
+                            
+                            <div class="result-score">
+                                <span class="score-label">Relevance:</span>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 68%"></div>
+                                </div>
+                                <span class="score-value">68%</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Simple theme toggle for demo
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+        });
+    </script>
+</body>
+</html>
