@@ -1,0 +1,39 @@
+# GitHub Pages configuration for Croatian Working Law Fact Checker
+
+# Site settings
+title: "Croatian Working Law Fact Checker"
+description: "Multilingual search engine for Croatian labor law with advanced features"
+url: "https://tyhrr.github.io"
+baseurl: "/fact-cheker-3"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Files to exclude from processing
+exclude:
+  - node_modules/
+  - .venv/
+  - package.json
+  - extract_pdf.py
+  - zakon-o-radu.pdf
+  - tests/
+  - scripts/pdf-to-json-converter.js
+  - README.md
+
+# Files to include
+include:
+  - assets/
+  - index.html
+
+# MIME types for GitHub Pages
+plugins:
+  - jekyll-sitemap
+
+# Enable GitHub Pages features
+github: [Repository metadata]

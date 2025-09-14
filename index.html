@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="hr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Croatian Working Law Fact Checker - Multilingual search tool for Croatian labor law with intelligent relevance scoring">
+    <meta name="keywords" content="Croatian labor law, working law, employment law, fact checker, multilingual search">
+    <meta name="author" content="Croatian Law Fact Checker">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Croatian Working Law Fact Checker">
+    <meta property="og:description" content="Search Croatian labor law articles with multilingual support and intelligent relevance scoring">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Croatian Working Law Fact Checker">
+    <meta property="twitter:description" content="Search Croatian labor law articles with multilingual support and intelligent relevance scoring">
+    
+    <title>Croatian Working Law Fact Checker</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/neumorphism.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/data/croatian-working-law.json" as="fetch" crossorigin="anonymous">
+    
+    <!-- PWA support -->
+    <meta name="theme-color" content="#f0f2f5">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link" tabindex="1">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.25L19 8L12 11.75L5 8L12 4.25ZM4 9.5L11 13.25V20.75L4 17V9.5ZM13 20.75V13.25L20 9.5V17L13 20.75Z"/>
+                        </svg>
+                    </div>
+                    <div class="title-section">
+                        <h1 class="main-title" id="app-title">Croatian Working Law Fact Checker</h1>
+                        <p class="subtitle" id="app-subtitle">Multilingual search for Croatian labor law</p>
+                    </div>
+                </div>
+                
+                <div class="header-controls">
+                    <!-- Language Selector -->
+                    <div class="language-selector">
+                        <button class="language-btn neumorphic-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12.87 15.07L10.33 12.56L10.36 12.53C12.1 10.59 13.34 8.36 14.07 6H17V4H10V2H8V4H1V6H12.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8H4.69C5.42 9.63 6.42 11.17 7.67 12.56L2.58 17.58L4 19L9 14L12.11 17.11L12.87 15.07ZM18.5 10H16.5L12 22H14L15.12 19H19.87L21 22H23L18.5 10ZM15.88 17L17.5 12.67L19.12 17H15.88Z"/>
+                            </svg>
+                            <span id="current-language">HR</span>
+                            <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7.41 8.59L12 13.17L16.59 8.59L18 10L12 16L6 10L7.41 8.59Z"/>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown" id="language-dropdown" role="menu" aria-labelledby="language-btn">
+                            <button class="language-option" data-lang="hr" role="menuitem">
+                                <span class="flag">🇭🇷</span>
+                                <span>Hrvatski</span>
+                            </button>
+                            <button class="language-option" data-lang="en" role="menuitem">
+                                <span class="flag">🇺🇸</span>
+                                <span>English</span>
+                            </button>
+                            <button class="language-option" data-lang="es" role="menuitem">
+                                <span class="flag">🇪🇸</span>
+                                <span>Español</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle neumorphic-btn" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18ZM12 16C14.21 16 16 14.21 16 12S14.21 8 12 8 8 9.79 8 12 9.79 16 12 16ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5S10.35 5.15 9.61 5.42L12 2ZM3.34 7L7.5 6.65C6.9 7.16 6.36 7.78 5.94 8.5C5.52 9.22 5.24 10.05 5.14 10.94L3.34 7ZM3.36 17L5.13 13.06C5.24 13.95 5.52 14.78 5.94 15.5C6.36 16.22 6.9 16.84 7.5 17.35L3.36 17ZM20.64 17L16.5 17.35C17.1 16.84 17.64 16.22 18.06 15.5C18.48 14.78 18.76 13.95 18.86 13.06L20.64 17ZM20.66 7L18.86 10.94C18.76 10.05 18.48 9.22 18.06 8.5C17.64 7.78 17.1 7.16 16.5 6.65L20.66 7ZM12 22L9.61 18.58C10.35 18.85 11.16 19 12 19S13.65 18.85 14.39 18.58L12 22Z"/>
+                        </svg>
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M17.75 4.09L15.22 6.03L16.13 9.09L13.5 7.28L10.87 9.09L11.78 6.03L9.25 4.09L12.44 4L13.5 1L14.56 4L17.75 4.09ZM21.25 11L19.61 12.25L20.2 14.23L18.5 13.06L16.8 14.23L17.39 12.25L15.75 11L17.81 10.95L18.5 9L19.19 10.95L21.25 11ZM18.97 15.95C19.8 15.87 20.69 17.05 20.16 17.8C19.84 18.25 19.5 18.67 19.08 19.07C15.17 23 8.84 23 4.94 19.07C1.03 15.17 1.03 8.83 4.94 4.93C5.34 4.53 5.76 4.17 6.21 3.85C6.96 3.32 8.14 4.21 8.06 5.04C7.79 7.9 8.75 10.87 10.95 13.06C13.14 15.26 16.1 16.22 18.97 15.95Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" role="main">
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-section" role="search" aria-label="Search Croatian labor law">
+                <div class="search-container">
+                    <div class="search-box neumorphic-inset">
+                        <div class="search-input-wrapper">
+                            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5C16 11.11 15.41 12.59 14.44 13.73L14.71 14H15.5L20.5 19L19 20.5L14 15.5V14.71L13.73 14.44C12.59 15.41 11.11 16 9.5 16A6.5 6.5 0 0 1 3 9.5A6.5 6.5 0 0 1 9.5 3M9.5 5C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/>
+                            </svg>
+                            <input 
+                                type="search" 
+                                class="search-input" 
+                                id="search-input"
+                                placeholder="Search Croatian labor law articles..."
+                                aria-label="Search Croatian labor law articles"
+                                autocomplete="off"
+                                spellcheck="false"
+                            >
+                            <button class="clear-search-btn" id="clear-search" aria-label="Clear search" style="display: none;">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Search Suggestions -->
+                    <div class="search-suggestions neumorphic-card" id="search-suggestions" style="display: none;" role="listbox" aria-label="Search suggestions">
+                        <!-- Dynamic suggestions will be inserted here -->
+                    </div>
+                    
+                    <!-- Search Filters -->
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <label class="filter-label" for="article-filter">Article Type:</label>
+                            <select class="filter-select neumorphic-inset" id="article-filter">
+                                <option value="all" data-i18n="all">All Articles</option>
+                                <option value="employment" data-i18n="employment">Employment</option>
+                                <option value="termination" data-i18n="termination">Termination</option>
+                                <option value="vacation" data-i18n="vacation">Vacation & Leave</option>
+                                <option value="wages" data-i18n="wages">Wages & Benefits</option>
+                                <option value="working-time" data-i18n="working-time">Working Time</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label" for="sort-filter">Sort by:</label>
+                            <select class="filter-select neumorphic-inset" id="sort-filter">
+                                <option value="relevance" data-i18n="relevance">Relevance</option>
+                                <option value="article-number" data-i18n="article-number">Article Number</option>
+                                <option value="alphabetical" data-i18n="alphabetical">Alphabetical</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" aria-live="polite" aria-label="Search results">
+                <!-- Search Stats -->
+                <div class="search-stats" id="search-stats" style="display: none;">
+                    <span class="results-count" id="results-count">0</span>
+                    <span class="results-text" data-i18n="results-found">results found</span>
+                    <span class="search-time" id="search-time"></span>
+                </div>
+                
+                <!-- No Results Message -->
+                <div class="no-results neumorphic-card" id="no-results" style="display: none;">
+                    <div class="no-results-content">
+                        <svg class="no-results-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3S3 5.91 3 9.5S5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14ZM12.5 8H8.5V10H12.5V8Z"/>
+                        </svg>
+                        <h3 class="no-results-title" data-i18n="no-results-title">No results found</h3>
+                        <p class="no-results-text" data-i18n="no-results-text">Try different keywords or browse by category</p>
+                        <div class="suggested-searches">
+                            <p class="suggested-title" data-i18n="try-searching">Try searching for:</p>
+                            <div class="suggested-tags">
+                                <button class="suggested-tag neumorphic-btn" data-query="vacation days">Vacation Days</button>
+                                <button class="suggested-tag neumorphic-btn" data-query="working hours">Working Hours</button>
+                                <button class="suggested-tag neumorphic-btn" data-query="termination notice">Termination Notice</button>
+                                <button class="suggested-tag neumorphic-btn" data-query="sick leave">Sick Leave</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results Container -->
+                <div class="results-container" id="results-container">
+                    <!-- Dynamic search results will be inserted here -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="load-more-container" id="load-more-container" style="display: none;">
+                    <button class="load-more-btn neumorphic-btn" id="load-more-btn">
+                        <span data-i18n="load-more">Load More Results</span>
+                        <svg class="load-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M16.59 8.59L12 13.17L7.41 8.59L6 10L12 16L18 10L16.59 8.59Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-text">
+                        <span data-i18n="footer-text">Data sourced from official Croatian labor law documents</span>
+                    </p>
+                    <p class="footer-disclaimer">
+                        <span data-i18n="footer-disclaimer">This tool is for informational purposes only. Always consult legal professionals for specific advice.</span>
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://www.zakon.hr/z/307/zakon-o-radu" target="_blank" rel="noopener noreferrer" class="footer-link">
+                        <span data-i18n="source-link">Official Source</span>
+                        <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14ZM19 19H5V5H12V3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19Z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Loading Spinner -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none;" aria-hidden="true">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <p class="loading-text" data-i18n="loading">Loading...</p>
+        </div>
+    </div>
+    
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- JavaScript -->
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/language-detection.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/relevance-scoring.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Development Integration Tests -->
+    <script>
+        // Only load integration tests in development (localhost)
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            const script = document.createElement('script');
+            script.src = 'tests/integration-test.js';
+            document.head.appendChild(script);
+        }
+    </script>
+</body>
+</html>

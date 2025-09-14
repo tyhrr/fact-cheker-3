@@ -1,0 +1,726 @@
+/* ==========================================================================
+   Neumorphism Design System
+   Soft UI Components with Light/Dark Theme Support
+   ========================================================================== */
+
+/* ==========================================================================
+   Neumorphic Button Base
+   ========================================================================== */
+
+.neumorphic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neumorphic-outset);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.neumorphic-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.neumorphic-btn:active,
+.neumorphic-btn.pressed {
+  transform: translateY(0);
+  box-shadow: var(--shadow-neumorphic-pressed);
+}
+
+.neumorphic-btn:focus {
+  outline: none;
+  box-shadow: var(--shadow-neumorphic-outset), 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.neumorphic-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-neumorphic-subtle);
+}
+
+/* Button Variants */
+.neumorphic-btn.primary {
+  background: linear-gradient(145deg, var(--color-primary-light), var(--color-primary-dark));
+  color: var(--color-text-inverse);
+  box-shadow: 8px 8px 16px rgba(79, 70, 229, 0.2), -8px -8px 16px rgba(99, 102, 241, 0.1);
+}
+
+.neumorphic-btn.primary:hover {
+  box-shadow: 12px 12px 24px rgba(79, 70, 229, 0.3), -12px -12px 24px rgba(99, 102, 241, 0.15);
+}
+
+.neumorphic-btn.primary:active {
+  box-shadow: inset 4px 4px 8px rgba(79, 70, 229, 0.3), inset -4px -4px 8px rgba(99, 102, 241, 0.1);
+}
+
+.neumorphic-btn.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-inverse);
+}
+
+.neumorphic-btn.success {
+  background: linear-gradient(145deg, #34d399, #10b981);
+  color: white;
+  box-shadow: 8px 8px 16px rgba(16, 185, 129, 0.2), -8px -8px 16px rgba(52, 211, 153, 0.1);
+}
+
+.neumorphic-btn.warning {
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+  color: white;
+  box-shadow: 8px 8px 16px rgba(245, 158, 11, 0.2), -8px -8px 16px rgba(251, 191, 36, 0.1);
+}
+
+.neumorphic-btn.error {
+  background: linear-gradient(145deg, #f87171, #ef4444);
+  color: white;
+  box-shadow: 8px 8px 16px rgba(239, 68, 68, 0.2), -8px -8px 16px rgba(248, 113, 113, 0.1);
+}
+
+/* Button Sizes */
+.neumorphic-btn.sm {
+  min-height: 32px;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-md);
+}
+
+.neumorphic-btn.lg {
+  min-height: 48px;
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-xl);
+}
+
+.neumorphic-btn.xl {
+  min-height: 56px;
+  padding: var(--space-5) var(--space-8);
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-2xl);
+}
+
+/* Icon Buttons */
+.neumorphic-btn.icon-only {
+  width: 40px;
+  height: 40px;
+  min-height: unset;
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+.neumorphic-btn.icon-only.sm {
+  width: 32px;
+  height: 32px;
+}
+
+.neumorphic-btn.icon-only.lg {
+  width: 48px;
+  height: 48px;
+}
+
+/* ==========================================================================
+   Neumorphic Cards
+   ========================================================================== */
+
+.neumorphic-card {
+  background-color: var(--color-surface-elevated);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-neumorphic-outset);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+}
+
+.neumorphic-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.neumorphic-card.interactive {
+  cursor: pointer;
+}
+
+.neumorphic-card.pressed {
+  transform: translateY(0);
+  box-shadow: var(--shadow-neumorphic-pressed);
+}
+
+/* Card Variants */
+.neumorphic-card.elevated {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-4px);
+}
+
+.neumorphic-card.flat {
+  box-shadow: var(--shadow-neumorphic-subtle);
+}
+
+.neumorphic-card.inset {
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+/* Card Sizes */
+.neumorphic-card.sm {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+}
+
+.neumorphic-card.lg {
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+}
+
+/* ==========================================================================
+   Neumorphic Inputs
+   ========================================================================== */
+
+.neumorphic-input {
+  width: 100%;
+  background-color: var(--color-surface);
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neumorphic-inset);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  padding: var(--space-3) var(--space-4);
+  transition: all var(--transition-base);
+}
+
+.neumorphic-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.neumorphic-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-neumorphic-inset), 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.neumorphic-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Input Variants */
+.neumorphic-input.error {
+  box-shadow: var(--shadow-neumorphic-inset), 0 0 0 1px var(--color-error);
+}
+
+.neumorphic-input.success {
+  box-shadow: var(--shadow-neumorphic-inset), 0 0 0 1px var(--color-success);
+}
+
+/* ==========================================================================
+   Neumorphic Inset Elements
+   ========================================================================== */
+
+.neumorphic-inset {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-neumorphic-inset);
+  transition: all var(--transition-base);
+}
+
+.neumorphic-inset.deep {
+  box-shadow: inset 12px 12px 24px #d1d5db, inset -12px -12px 24px #ffffff;
+}
+
+[data-theme="dark"] .neumorphic-inset.deep {
+  box-shadow: inset 12px 12px 24px #0f172a, inset -12px -12px 24px #2d3748;
+}
+
+/* ==========================================================================
+   Result Card Component
+   ========================================================================== */
+
+.result-card {
+  background-color: var(--color-surface-elevated);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-neumorphic-outset);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.result-card:hover::before {
+  opacity: 1;
+}
+
+.result-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.result-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.result-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.article-number {
+  background: linear-gradient(145deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-neumorphic-subtle);
+}
+
+.result-category {
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+.result-content {
+  margin-bottom: var(--space-5);
+}
+
+.result-text {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-3);
+}
+
+.highlight {
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.2) 100%);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.result-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.relevance-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.relevance-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-xs);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.relevance-btn.helpful {
+  background: linear-gradient(145deg, #34d399, #10b981);
+  color: white;
+  box-shadow: 4px 4px 8px rgba(16, 185, 129, 0.2), -4px -4px 8px rgba(52, 211, 153, 0.1);
+}
+
+.relevance-btn.helpful:hover {
+  box-shadow: 6px 6px 12px rgba(16, 185, 129, 0.3), -6px -6px 12px rgba(52, 211, 153, 0.15);
+}
+
+.relevance-btn.not-helpful {
+  background-color: var(--color-surface);
+  color: var(--color-text-tertiary);
+  box-shadow: var(--shadow-neumorphic-subtle);
+}
+
+.relevance-btn.not-helpful:hover {
+  color: var(--color-error);
+  box-shadow: var(--shadow-neumorphic-outset);
+}
+
+.relevance-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.result-score {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+.score-bar {
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-neumorphic-inset);
+  overflow: hidden;
+  position: relative;
+}
+
+.score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-warning), var(--color-success));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+  box-shadow: var(--shadow-neumorphic-subtle);
+}
+
+/* ==========================================================================
+   Toast Notification Component
+   ========================================================================== */
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 300px;
+  max-width: 400px;
+  background-color: var(--color-surface-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  padding: var(--space-4);
+  transform: translateX(100%);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  transition: background-color var(--transition-base);
+}
+
+.toast.success::before {
+  background-color: var(--color-success);
+}
+
+.toast.warning::before {
+  background-color: var(--color-warning);
+}
+
+.toast.error::before {
+  background-color: var(--color-error);
+}
+
+.toast.info::before {
+  background-color: var(--color-info);
+}
+
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.toast.success .toast-icon {
+  fill: var(--color-success);
+}
+
+.toast.warning .toast-icon {
+  fill: var(--color-warning);
+}
+
+.toast.error .toast-icon {
+  fill: var(--color-error);
+}
+
+.toast.info .toast-icon {
+  fill: var(--color-info);
+}
+
+.toast-content {
+  flex: 1;
+}
+
+.toast-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.toast-message {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-base);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+}
+
+.toast-close svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   Progress Indicators
+   ========================================================================== */
+
+.neumorphic-progress {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-neumorphic-inset);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+  box-shadow: var(--shadow-neumorphic-subtle);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================================================
+   Neumorphic Switch/Toggle
+   ========================================================================== */
+
+.neumorphic-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 32px;
+}
+
+.switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-neumorphic-inset);
+  transition: all var(--transition-base);
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--color-surface-elevated);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-neumorphic-outset);
+  transition: all var(--transition-base);
+}
+
+.switch-input:checked + .switch-slider {
+  background: linear-gradient(145deg, var(--color-primary-light), var(--color-primary-dark));
+}
+
+.switch-input:focus + .switch-slider {
+  box-shadow: var(--shadow-neumorphic-inset), 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.switch-input:checked + .switch-slider:before {
+  transform: translateX(28px);
+  background-color: white;
+  box-shadow: var(--shadow-neumorphic-outset);
+}
+
+/* ==========================================================================
+   Responsive Neumorphic Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .neumorphic-card {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+  
+  .neumorphic-btn {
+    min-height: 44px; /* Larger touch targets on mobile */
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  .result-card {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+  
+  /* Reduce shadow intensity on mobile for better performance */
+  .neumorphic-btn,
+  .neumorphic-card,
+  .result-card {
+    box-shadow: var(--shadow-neumorphic-subtle);
+  }
+  
+  .neumorphic-btn:hover,
+  .neumorphic-card:hover,
+  .result-card:hover {
+    transform: none; /* Disable hover transforms on mobile */
+    box-shadow: var(--shadow-neumorphic-outset);
+  }
+}
+
+/* ==========================================================================
+   High Contrast Mode Support
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .neumorphic-btn,
+  .neumorphic-card,
+  .result-card,
+  .neumorphic-inset {
+    border: 2px solid var(--color-border);
+  }
+  
+  .highlight {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .neumorphic-btn,
+  .neumorphic-card,
+  .result-card,
+  .toast,
+  .progress-fill,
+  .switch-slider,
+  .switch-slider:before {
+    transition: none;
+  }
+  
+  .progress-fill::after {
+    animation: none;
+  }
+  
+  .spinner-ring {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .neumorphic-btn,
+  .neumorphic-card,
+  .result-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .theme-toggle,
+  .language-selector,
+  .relevance-actions {
+    display: none;
+  }
+}
