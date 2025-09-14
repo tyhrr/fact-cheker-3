@@ -48,7 +48,8 @@
                 <div class="logo-section">
                     <div class="logo">
                         <svg class="logo-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.25L19 8L12 11.75L5 8L12 4.25ZM4 9.5L11 13.25V20.75L4 17V9.5ZM13 20.75V13.25L20 9.5V17L13 20.75Z"/>
+                            <!-- Icono de balanza de la justicia -->
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 6.5V10.5L21 9ZM3 9L9 10.5V6.5L3 7V9ZM15 11.5V13H21L20.4 14H15.6L15 11.5ZM9 11.5L8.4 14H3.6L3 13H9V11.5ZM12 7C12.6 7 13 7.4 13 8V20H11V8C11 7.4 11.4 7 12 7Z"/>
                         </svg>
                     </div>
                     <div class="title-section">
@@ -60,11 +61,8 @@
                 <div class="header-controls">
                     <!-- Language Selector -->
                     <div class="language-selector">
-                        <button class="neumorphic-circle language-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
-                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M12.87 15.07L10.33 12.56L10.36 12.53C12.1 10.59 13.34 8.36 14.07 6H17V4H10V2H8V4H1V6H12.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8H4.69C5.42 9.63 6.42 11.17 7.67 12.56L2.58 17.58L4 19L9 14L12.11 17.11L12.87 15.07ZM18.5 10H16.5L12 22H14L15.12 19H19.87L21 22H23L18.5 10ZM15.88 17L17.5 12.67L19.12 17H15.88Z"/>
-                            </svg>
-                            <span id="current-language" style="font-size: 10px; margin-top: 2px;">HR</span>
+                        <button class="neumorphic-circle small language-btn" id="language-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                            <span id="current-language" style="font-size: 11px; font-weight: 600;">HR</span>
                         </button>
                         <div class="language-dropdown neumorphic-card" id="language-dropdown" role="menu" aria-labelledby="language-btn">
                             <button class="language-option neumorphic-btn" data-lang="hr" role="menuitem">
@@ -83,11 +81,11 @@
                     </div>
                     
                     <!-- Theme Toggle -->
-                    <button class="neumorphic-circle large theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true" width="24" height="24">
+                    <button class="neumorphic-circle theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">
                             <path d="M12 18C8.69 18 6 15.31 6 12S8.69 6 12 6 18 8.69 18 12 15.31 18 12 18ZM12 16C14.21 16 16 14.21 16 12S14.21 8 12 8 8 9.79 8 12 9.79 16 12 16ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5S10.35 5.15 9.61 5.42L12 2Z"/>
                         </svg>
-                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true" width="24" height="24" style="display: none;">
+                        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" style="display: none;">
                             <path d="M18.97 15.95C19.8 15.87 20.69 17.05 20.16 17.8C19.84 18.25 19.5 18.67 19.08 19.07C15.17 23 8.84 23 4.94 19.07C1.03 15.17 1.03 8.83 4.94 4.93C5.34 4.53 5.76 4.17 6.21 3.85C6.96 3.32 8.14 4.21 8.06 5.04C7.79 7.9 8.75 10.87 10.95 13.06C13.14 15.26 16.1 16.22 18.97 15.95Z"/>
                         </svg>
                     </button>
