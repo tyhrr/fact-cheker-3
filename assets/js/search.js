@@ -32,6 +32,10 @@ class SearchEngine {
     // Debounce settings
     this.debounceDelay = 300;
     this.suggestionDelay = 150;
+    
+    // Focus preservation settings
+    this.preserveInputFocus = true;
+    this.focusRestoreDelay = 50;
   }
 
   /**
@@ -49,6 +53,9 @@ class SearchEngine {
       
       // Setup DOM event listeners
       this.setupEventListeners();
+      
+      // Setup focus preservation
+      this.setupFocusPreservation();
       
       // Load search history
       this.loadSearchHistory();
@@ -78,8 +85,17 @@ class SearchEngine {
     
     // Search input events
     if (searchInput) {
+      // Single comprehensive input handler to avoid conflicts
       searchInput.addEventListener('input', (e) => {
-        this.handleSearchInput(e.target.value);
+        const value = e.target.value;
+        
+        // Handle search input
+        this.handleSearchInput(value);
+        
+        // Handle clear button visibility
+        if (clearButton) {
+          clearButton.style.display = value ? 'flex' : 'none';
+        }
       });
       
       searchInput.addEventListener('keydown', (e) => {
@@ -88,13 +104,6 @@ class SearchEngine {
       
       searchInput.addEventListener('focus', () => {
         this.showSearchSuggestions();
-      });
-      
-      // Clear search when input is empty
-      searchInput.addEventListener('input', (e) => {
-        if (clearButton) {
-          clearButton.style.display = e.target.value ? 'flex' : 'none';
-        }
       });
     }
     
@@ -133,6 +142,13 @@ class SearchEngine {
           this.performSearch(query);
           if (searchInput) {
             searchInput.value = query;
+            this.currentQuery = query;
+            
+            // Maintain focus after clicking suggestion
+            setTimeout(() => {
+              searchInput.focus();
+              searchInput.setSelectionRange(query.length, query.length);
+            }, 100);
           }
         }
       }
@@ -160,22 +176,32 @@ class SearchEngine {
     // Update current query
     this.currentQuery = value.trim();
     
-    // Show suggestions immediately for short queries
+    // Show suggestions immediately for short queries (without affecting focus)
     if (this.currentQuery.length >= 2) {
       setTimeout(() => {
         this.updateSearchSuggestions(this.currentQuery);
       }, this.suggestionDelay);
     }
     
-    // Perform search with debounce
+    // Perform search with debounce (preserve focus)
     this.searchTimeout = setTimeout(() => {
       if (this.currentQuery) {
-        // Auto-detect language
-        if (window.LanguageManager) {
-          window.LanguageManager.autoDetectAndSwitch(this.currentQuery);
-        }
+        // Store current focus state
+        const searchInput = document.getElementById('search-input');
+        const hadFocus = document.activeElement === searchInput;
         
-        this.performSearch(this.currentQuery);
+        // Perform search without language auto-detection to avoid DOM manipulation
+        this.performSearch(this.currentQuery).then(() => {
+          // Restore focus if it was lost during search
+          if (hadFocus && searchInput && document.activeElement !== searchInput) {
+            // Use setTimeout to ensure DOM updates are complete
+            setTimeout(() => {
+              searchInput.focus();
+              // Restore cursor position to end of text
+              searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+            }, 0);
+          }
+        });
       } else {
         this.clearResults();
       }
@@ -252,6 +278,12 @@ class SearchEngine {
     if (searchInput) {
       searchInput.value = suggestion;
       this.currentQuery = suggestion;
+      
+      // Maintain focus and cursor position
+      setTimeout(() => {
+        searchInput.focus();
+        searchInput.setSelectionRange(suggestion.length, suggestion.length);
+      }, 0);
     }
     
     this.hideSuggestions();
@@ -330,6 +362,11 @@ class SearchEngine {
     
     if (!resultsContainer) return;
     
+    // Store current focus state before DOM manipulation
+    const searchInput = document.getElementById('search-input');
+    const hadFocus = document.activeElement === searchInput;
+    const cursorPosition = hadFocus ? searchInput.selectionStart : 0;
+    
     // Update search stats
     if (searchStats) {
       const resultsCount = document.getElementById('results-count');
@@ -371,6 +408,16 @@ class SearchEngine {
     
     // Store results for pagination
     this.totalResults = results.total;
+    
+    // Restore focus if it was lost during DOM manipulation
+    if (hadFocus && searchInput && this.preserveInputFocus) {
+      setTimeout(() => {
+        if (document.activeElement !== searchInput) {
+          searchInput.focus();
+          searchInput.setSelectionRange(cursorPosition, cursorPosition);
+        }
+      }, this.focusRestoreDelay);
+    }
   }
 
   /**
@@ -906,6 +953,78 @@ class SearchEngine {
     this.metrics.averageSearchTime = 
       (this.metrics.averageSearchTime * (this.metrics.totalSearches - 1) + searchTime) / 
       this.metrics.totalSearches;
+  }
+
+  /**
+   * Preserve input focus during operations
+   * @private
+   */
+  preserveFocus() {
+    if (!this.preserveInputFocus) return;
+    
+    const searchInput = document.getElementById('search-input');
+    if (searchInput && document.activeElement === searchInput) {
+      const cursorPosition = searchInput.selectionStart;
+      
+      // Set a very short timeout to restore focus after any DOM manipulation
+      setTimeout(() => {
+        if (document.activeElement !== searchInput) {
+          searchInput.focus();
+          searchInput.setSelectionRange(cursorPosition, cursorPosition);
+        }
+      }, this.focusRestoreDelay);
+    }
+  }
+
+  /**
+   * Setup focus preservation system
+   * @private
+   */
+  setupFocusPreservation() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+    
+    // Create a mutation observer to detect DOM changes that might affect focus
+    const observer = new MutationObserver((mutations) => {
+      const inputStillFocused = document.activeElement === searchInput;
+      if (!inputStillFocused && searchInput.dataset.hadFocus === 'true') {
+        // Input lost focus during operation, restore it
+        setTimeout(() => {
+          if (searchInput.dataset.preserveFocus === 'true') {
+            searchInput.focus();
+            const length = searchInput.value.length;
+            searchInput.setSelectionRange(length, length);
+          }
+        }, this.focusRestoreDelay);
+      }
+    });
+    
+    // Observe the results container for changes
+    const resultsContainer = document.getElementById('results-container');
+    if (resultsContainer) {
+      observer.observe(resultsContainer, {
+        childList: true,
+        subtree: true,
+        attributes: true
+      });
+    }
+    
+    // Track focus state
+    searchInput.addEventListener('focus', () => {
+      searchInput.dataset.hadFocus = 'true';
+    });
+    
+    searchInput.addEventListener('blur', () => {
+      // Only clear focus flag if blur was intentional (not during search)
+      setTimeout(() => {
+        if (document.activeElement !== searchInput) {
+          searchInput.dataset.hadFocus = 'false';
+        }
+      }, 100);
+    });
+    
+    // Store observer for cleanup if needed
+    this.focusObserver = observer;
   }
 
   /**

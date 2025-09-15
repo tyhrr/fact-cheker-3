@@ -687,6 +687,27 @@ body {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
+  
+  /* Focus preservation settings */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+/* Ensure search input doesn't lose focus during operations */
+.search-input:focus {
+  outline: none;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Prevent input blur during DOM updates */
+.search-input[data-preserve-focus="true"] {
+  pointer-events: auto !important;
+  user-select: text !important;
 }
 
 .search-input::placeholder {
