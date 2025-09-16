@@ -669,11 +669,7 @@ class CroatianLawApp {
       }));
       
       // Perform search
-      const results = await this.searchEngine.search(query, {
-        maxResults: this.config.maxSearchResults,
-        filters: this.state.activeFilters,
-        page: this.state.currentPage
-      });
+      const results = await this.searchEngine.performSearch(query);
       
       // Update metrics
       const searchTime = performance.now() - startTime;
@@ -1271,6 +1267,120 @@ class CroatianLawApp {
       state: { ...this.state },
       metrics: { ...this.metrics }
     };
+  }
+
+  /**
+   * Update UI state based on current application state
+   * @private
+   */
+  updateUIState() {
+    try {
+      // Update search input state
+      if (this.elements.searchInput) {
+        this.elements.searchInput.value = this.state.currentQuery || '';
+      }
+      
+      // Update language selector
+      if (this.elements.languageSelector && this.languageManager) {
+        const currentLang = this.languageManager.getCurrentLanguage();
+        this.elements.languageSelector.value = currentLang;
+      }
+      
+      // Update theme state
+      if (this.elements.themeToggle) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        this.elements.themeToggle.setAttribute('aria-pressed', isDark.toString());
+      }
+      
+      // Update results display state
+      if (this.elements.resultsContainer) {
+        const hasResults = this.elements.resultsContainer.children.length > 0;
+        this.elements.resultsContainer.setAttribute('data-has-results', hasResults.toString());
+      }
+      
+      // Update loading state
+      this.updateLoadingState(this.state.isLoading);
+      
+      console.log('✅ UI state updated successfully');
+    } catch (error) {
+      console.warn('Failed to update UI state:', error);
+    }
+  }
+
+  /**
+   * Handle search errors
+   * @private
+   * @param {Error} error - Search error
+   */
+  handleSearchError(error) {
+    console.error('Search error:', error);
+    
+    // Hide loading state
+    this.updateLoadingState(false);
+    
+    // Determine error message
+    let message = 'An error occurred while searching. Please try again.';
+    
+    if (error.name === 'NetworkError') {
+      message = 'Network error. Please check your connection and try again.';
+    } else if (error.name === 'TimeoutError') {
+      message = 'Search timed out. Please try with different keywords.';
+    } else if (error.message) {
+      message = `Search failed: ${error.message}`;
+    }
+    
+    // Show error message
+    this.showErrorMessage(message);
+    
+    // Clear partial results
+    this.clearResults();
+    
+    // Track error for analytics
+    if (this.relevanceScoring) {
+      this.relevanceScoring.trackError('search_error', {
+        message: error.message,
+        stack: error.stack
+      });
+    }
+  }
+
+  /**
+   * Clear search results
+   * @private
+   */
+  clearResults() {
+    try {
+      // Clear results container
+      if (this.elements.resultsContainer) {
+        this.elements.resultsContainer.innerHTML = '';
+      }
+      
+      // Hide results stats
+      if (this.elements.resultsStats) {
+        this.elements.resultsStats.style.display = 'none';
+      }
+      
+      // Hide no results message
+      if (this.elements.noResults) {
+        this.elements.noResults.style.display = 'none';
+      }
+      
+      // Hide load more button
+      if (this.elements.loadMore) {
+        this.elements.loadMore.style.display = 'none';
+      }
+      
+      // Reset pagination
+      this.state.currentPage = 0;
+      this.state.hasMoreResults = false;
+      
+      // Update UI state
+      this.updateUIState();
+      
+      console.log('🧹 Search results cleared');
+    } catch (error) {
+      console.warn('Failed to clear results:', error);
+    }
   }
 
   /**

@@ -122,7 +122,9 @@ class LanguageManager {
         'feedback-success': 'Hvala vam na povratnim informacijama!',
         'feedback-error': 'Dogodila se greška prilikom spremanja povratnih informacija',
         'database-loading': 'Učitavanje baze podataka...',
-        'database-error': 'Greška baze podataka'
+        'database-error': 'Greška baze podataka',
+        'original': 'Izvorni',
+        'translation': 'Prijevod'
       },
       en: {
         // English translations
@@ -153,7 +155,9 @@ class LanguageManager {
         'feedback-success': 'Thank you for your feedback!',
         'feedback-error': 'An error occurred while saving feedback',
         'database-loading': 'Loading database...',
-        'database-error': 'Database Error'
+        'database-error': 'Database Error',
+        'original': 'Original',
+        'translation': 'Translation'
       },
       es: {
         // Spanish translations
@@ -184,7 +188,9 @@ class LanguageManager {
         'feedback-success': '¡Gracias por tus comentarios!',
         'feedback-error': 'Ocurrió un error al guardar los comentarios',
         'database-loading': 'Cargando base de datos...',
-        'database-error': 'Error de Base de Datos'
+        'database-error': 'Error de Base de Datos',
+        'original': 'Original',
+        'translation': 'Traducción'
       }
     };
   }

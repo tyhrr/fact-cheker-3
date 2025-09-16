@@ -293,12 +293,12 @@ class SearchEngine {
   /**
    * Perform search with current query and filters
    * @param {string} query - Search query
-   * @returns {Promise<void>}
+   * @returns {Promise<Object>} Search results object
    */
   async performSearch(query = this.currentQuery) {
     if (!query.trim()) {
       this.clearResults();
-      return;
+      return { results: [], total: 0, query: '' };
     }
     
     const startTime = performance.now();
@@ -340,9 +340,13 @@ class SearchEngine {
       
       console.log(`🔍 Search completed: "${query}" (${Math.round(searchTime)}ms, ${results.results.length} results)`);
       
+      // Return results for external callers
+      return results;
+      
     } catch (error) {
       console.error('❌ Search failed:', error);
       this.showErrorState('Search failed. Please try again.');
+      throw error; // Re-throw for external error handling
     } finally {
       this.showLoadingState(false);
     }
